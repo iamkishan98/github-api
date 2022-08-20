@@ -43,3 +43,5 @@ tmp/dataset_uploads/*
 not_used/
 
 old_public/
+
+.vscode/
