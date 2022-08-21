@@ -17,11 +17,13 @@ async function getRepositoriesByOrg(organization, repositories, committees){
     var result = [];
 
     while(repositories != 0){
+        // github API returns max. 100 results per page so store min(repositories, maxResultCount) pages at a time
         var maxResultCount = 100;
         if(repositories <= 100){
             maxResultCount = repositories;
         }
 
+        // decrement the count of remaining repositories
         repositories -= maxResultCount;
 
         // Fetch organization repositories by forks count
@@ -37,7 +39,7 @@ async function getRepositoriesByOrg(organization, repositories, committees){
         });
 
 
-
+        // Loop over all the repositories in current page  
         for(var i in orgRepositories.data.items){
 
             let repository = orgRepositories.data.items[i];
@@ -55,8 +57,9 @@ async function getRepositoriesByOrg(organization, repositories, committees){
                 visibility: repository.visibility
             })
 
+            
             let contributorsUrl = orgRepositories.data.items[i].contributors_url;
-
+            // For each repository find the contributors with by sorting by given parameters
             const contributors = await getRepositoryContributors(contributorsUrl, committees);
 
             if(contributors && contributors.length != 0){
@@ -74,12 +77,15 @@ async function getRepositoriesByOrg(organization, repositories, committees){
                     })
                 }
 
+                // Push the contributors to current repository's contributors
                 result[i]["contributors"] = contributorsArray;
             }else{
+                // If no contributors found then leave it as empty
                 result[i]["contributors"] = [];
             }
         }
 
+        // Go to next page
         currentPage++;
     }
 
