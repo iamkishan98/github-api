@@ -37,9 +37,9 @@ GET /get-repositories
 Query parameters:
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `organization` | `string` | **Required**. The organization name for which the repositories to be fetched |
-| `repositories` | `integer` | The maximum number of repositories to be fetched. Default: 4 |
-| `committees` | `integer` | The maximum number of committees/contributors to be fetched for each repository. Default: 2 |
+| `organisation` | `string` | **Required**. The organization name for which the repositories to be fetched |
+| `n` | `integer` | The maximum number of repositories to be fetched. Default: 4 |
+| `m` | `integer` | The maximum number of committees/contributors to be fetched for each repository. Default: 2 |
 
 
 

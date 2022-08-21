@@ -2,6 +2,15 @@
 
 import axios from 'axios';
 
+/**
+ * function to returns repositories for specified organisation
+ * 
+ * @param string  organisation (Required) 
+ * @param integer  repositories 
+ * @param integer  committees
+ * 
+ * @return  []      result 
+ */
 async function getRepositoriesByOrg(organization, repositories, committees){
 
     var currentPage = 1;

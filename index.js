@@ -9,11 +9,6 @@ app.use(express.json());
 
 import github from './routes/github.js';
 
-// app.use((req, res, next) => {
-//   console.log(req.originalUrl);
-//   next();
-// });
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
@@ -25,11 +20,13 @@ app.use(github);
 //400
 app.use((req, res, next) => {
   res.status(400).send("400 : Page not found !");
+  next()
 });
 
 // 500
 app.use((err, req, res, next) => {
   res.status(500).send("500 : Interval server error !");
+  next()
 });
 
 const PORT = process.env.PORT || 3000;
